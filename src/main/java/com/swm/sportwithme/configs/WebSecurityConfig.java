@@ -17,6 +17,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    //    private static final String[] adminEndpoints = {};
+    private static final String[] requestEndpoints = {"/", "/register", "/checkLoginForRegistration",
+            "/checkPhoneForRegistration"};
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/scripts/**", "/styles/**");
@@ -25,15 +28,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/register", "/checkLoginForRegistration",
-                                "/checkPhoneForRegistration").permitAll()
-                        .anyRequest().permitAll()
-                )
-                .formLogin((form) -> form.loginPage("/login").permitAll()
-                )
-                .logout((logout) -> logout.permitAll());
+                .httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(requestEndpoints).permitAll()
+//                .antMatchers(adminEndpoints).hasRole("ADMIN")
+                .anyRequest().authenticated();
+
+//        http
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//                .authorizeHttpRequests((requests) -> requests
+//                        .antMatchers("/", "/register", "/checkLoginForRegistration",
+//                                "/checkPhoneForRegistration").permitAll()
+//                        .anyRequest().permitAll()
+//                )
+//                .formLogin((form) -> form.loginPage("/login").permitAll()
+//                )
+//                .logout((logout) -> logout.permitAll());
     }
 
     @Bean
