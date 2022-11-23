@@ -27,9 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/home").permitAll()
-                        .antMatchers("/temp").authenticated()
-                        .anyRequest().authenticated()
+                        .antMatchers("/", "/register", "/checkLoginForRegistration",
+                                "/checkPhoneForRegistration").permitAll()
+                        .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form.loginPage("/login").permitAll()
                 )
