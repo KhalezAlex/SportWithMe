@@ -133,7 +133,6 @@ function onLoginInput() {
     })
 
     inputLogin.on("change", function () {
-        console.log(inputLogin.val());
         $.ajax({
             url: "/checkLoginForRegistration",
             type: "POST",
