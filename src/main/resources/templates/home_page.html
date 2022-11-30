@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>HomePage</title>
+  <link media="all" rel="stylesheet" href="css/home_page.css" >
+  <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<header>
+  <div class="div_emblem" id="div_emblem">
+
+  </div>
+
+  <select class="select_city">
+
+  </select>
+
+  <form class="form_profile_login_request" th:if="${isAuthenticated}">
+    <button class="button_submit_form_request">Новое событие</button>
+  </form>
+
+  <button class="button_chat">Чат</button>
+
+  <form class="form_profile_login_request" th:action="${action}">
+    <input class="button_submit_form_request" type="submit" id="button_profile" th:value="${buttonValue}">
+  </form>
+
+</header>
+<div class="container">
+  <div class="div_search">
+    <form class="form_search_event">
+    </form>
+  </div>
+
+  <div id="div_compilation" class="div_compilation">
+    <div class="div_your_events">
+
+    </div>
+
+    <div class="div_random_events">
+
+    </div>
+  </div>
+
+  <div class="div_RSS_mass_events">
+
+  </div>
+</div>
+
+<footer>
+
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+<script src="scripts/home_page.js"></script>
+<!--<script src="scripts/inputChangeFunctions.js"></script>-->
+
+</body>
+</html>

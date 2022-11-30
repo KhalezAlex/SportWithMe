@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link media="all" rel="stylesheet" href="css/log_reg_page.css" >
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<div class="container">
+    <div id="div_modal_reg_log" class="modal">
+        <div id="div_reg_log_choice" class="taskChoice">
+            <p class="parChoice" id="par_Login" onclick="chooseLogin()">Sign in</p>
+            <p class="parChoice" id="par_Register" onclick="chooseRegister()">Register</p>
+        </div>
+        <form id="form_login" class="form_login" method="post">
+            <input type="text" id="input_login" class="input_reg_log_data" placeholder="login" name="username">
+            <input type="text" id="input_phone" class="input_reg_log_data" placeholder="phone" name="phone">
+            <input type="password" id="input_password" class="input_reg_log_data" placeholder="password" name="password">
+            <input type="password" id="input_password_repeat" class="input_reg_log_data" placeholder="repeat password">
+            <input type="submit" id="button_submit_form_login" class="input_reg_log_submit">
+        </form>
+    </div>
+
+</div>
+
+<footer>
+
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+<script src="scripts/log_reg_page.js"></script>
+<!--<script src="scripts/inputChangeFunctions.js"></script>-->
+
+</body>
+</html>

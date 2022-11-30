@@ -2,78 +2,52 @@ package com.swm.sportwithme.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    //    private static final String[] adminEndpoints = {};
-    private static final String[] requestEndpoints = {"/", "/register", "/checkLoginForRegistration",
-            "/checkPhoneForRegistration"};
+    private static final String[] requestPermitAll = {"/" ,"/login", "/home_page", "/register", "/log_reg_page"};
+    private static final String[] requestPermitAdmin = {"/error_page", "/admin_page", "/user_page"};
+    private static final String[] requestPermitUser = {"/error_page", "/user_page"};
+
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/scripts/**", "/styles/**");
+        web.ignoring().antMatchers("/css/**", "/scripts/**");
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
+    protected void configure(HttpSecurity httpSecurity) throws Exception{
+        httpSecurity
                 .httpBasic().disable()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
                 .authorizeRequests()
-                .antMatchers(requestEndpoints).permitAll()
-//                .antMatchers(adminEndpoints).hasRole("ADMIN")
-                .anyRequest().authenticated();
-
-//        http
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//                .authorizeHttpRequests((requests) -> requests
-//                        .antMatchers("/", "/register", "/checkLoginForRegistration",
-//                                "/checkPhoneForRegistration").permitAll()
-//                        .anyRequest().permitAll()
-//                )
-//                .formLogin((form) -> form.loginPage("/login").permitAll()
-//                )
-//                .logout((logout) -> logout.permitAll());
+                .antMatchers(requestPermitAdmin).hasRole("ADMIN")
+                .antMatchers(requestPermitUser).hasRole("USER")
+                .antMatchers(requestPermitAll).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/").permitAll()
+                .and()
+                .logout().permitAll().logoutSuccessUrl("/");
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager detailsManager = new InMemoryUserDetailsManager();
-        detailsManager.createUser(getUser("user", "user", "USER"));
-        detailsManager.createUser(getUser("admin", "admin", "ADMIN"));
-        return detailsManager;
-    }
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {return super.authenticationManagerBean();}
 
-    private UserDetails getUser(String username, String password, String roles) {
-        return User.withDefaultPasswordEncoder()
-                .username(username).password(password).roles(roles).build();
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
-
-
-//    @Bean
-//    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests((requests) -> requests
-//                        .antMatchers("/", "/home").permitAll()
-//                        .anyRequest().authenticated()
-//                )
-//                .formLogin((form) -> form.loginPage("/login").permitAll()
-//                )
-//                .logout((logout) -> logout.permitAll());
-//
-//        return http.build();
-//    }
