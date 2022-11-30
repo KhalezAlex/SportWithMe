@@ -1,9 +1,15 @@
 let logCheck = 0;
 let phoneCheck = 0;
 
+chooseLogin();
+hideHashes();
+
 function chooseLogin() {
+    let inputLogin = $("#input_login");
+    $("#input_password").off("input");
+    inputLogin.off("change");
     flushRegistrationInputs();
-    $("#input_login").attr("placeholder", "login/phone");
+    inputLogin.attr("placeholder", "login/phone");
     $("#par_Register").css("font-weight", "normal");
     $("#par_Login").css("font-weight", "bold");
     $("#input_password_repeat").hide();
@@ -15,6 +21,7 @@ function chooseLogin() {
 
 }
 function chooseRegister() {
+    inputChangeFunctions();
     flushRegistrationInputs();
     $("#input_login").attr("placeholder", "login");
     $("#par_Register").css("font-weight", "bold");
@@ -27,7 +34,10 @@ function chooseRegister() {
     submit.attr('disabled', "disabled");
 }
 
-
+function hideHashes() {
+    $("#input_login_pass_hash").hide();
+    $("#input_phone_pass_hash").hide();
+}
 
 function changeAbilitySubmitLoginButton() {
     if ($("#input_password").val() !== $("#input_password_repeat").val())
@@ -44,7 +54,9 @@ function getHash(string) {
         $(inputHash).val(
             function(){
                 return ($(input).val() + $("#input_password").val()).
-                split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
+                split("").reduce(function(a,b){
+                    a=((a<<5)-a)+b.charCodeAt(0);
+                    return a&a},0);
             });
 }
 
@@ -56,19 +68,6 @@ function flushRegistrationInputs() {
     $("#input_login_pass_hash").val("");
     $("#input_phone_pass_hash").val("");
 }
-
-inputChangeFunctions();
-
-$("#button_login").on("click", function () {
-    $("#input_login_pass_hash").hide();
-    $("#input_phone_pass_hash").hide();
-    $("#div_modal_reg_log").show();
-    chooseLogin();
-})
-$("#div_emblem").on("click", function() {
-    flushRegistrationInputs();
-    $("#div_modal_reg_log").hide();
-})
 
 function inputChangeFunctions() {
     onPasswordInput();
