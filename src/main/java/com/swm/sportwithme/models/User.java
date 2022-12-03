@@ -1,10 +1,13 @@
 package com.swm.sportwithme.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +16,11 @@ public class User {
     private String username;
     @Column(name = "password")
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
     @ManyToMany
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -30,10 +38,6 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public void setId(Long id) {
@@ -54,6 +58,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public Set<Role> getRoles() {

@@ -1,5 +1,7 @@
 package com.swm.sportwithme.controllers;
 
+import com.swm.sportwithme.services.entityServices.cityService.CityServiceImplementation;
+import com.swm.sportwithme.services.entityServices.countryService.CountryServiceImplementation;
 import com.swm.sportwithme.services.entityServices.roleService.RoleServiceImplementation;
 import com.swm.sportwithme.services.entityServices.userService.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import static com.swm.sportwithme.utilities.ModelsInit.homePageModelInit;
-import static com.swm.sportwithme.utilities.TablesInit.adminInit;
-import static com.swm.sportwithme.utilities.TablesInit.rolesTableInit;
+import static com.swm.sportwithme.utilities.TablesInit.*;
 
 
 @Controller
@@ -19,11 +20,17 @@ public class HomePageController {
     RoleServiceImplementation roleService;
     @Autowired
     UserServiceImplementation userServiceImplementation;
+    @Autowired
+    CountryServiceImplementation countryServiceImplementation;
+    @Autowired
+    CityServiceImplementation cityServiceImplementation;
 
     @GetMapping("/")
     public String homePage(Authentication auth, Model model) {
         rolesTableInit(roleService);
         adminInit(userServiceImplementation);
+        countryTableInit(countryServiceImplementation);
+        cityTableInit(cityServiceImplementation);
         homePageModelInit(model, auth);
         return "home_page";
     }

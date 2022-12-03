@@ -1,6 +1,7 @@
 package com.swm.sportwithme.models;
 
 import com.swm.sportwithme.models.User;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,6 +26,15 @@ public class Role implements Serializable {
     public Role() {
     }
 
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", users=" + users +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
@@ -47,14 +57,5 @@ public class Role implements Serializable {
 
     public void setUsers(Set<User> users) {
         this.users = users;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", users=" + users +
-                '}';
     }
 }
