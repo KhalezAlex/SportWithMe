@@ -1,7 +1,7 @@
 package com.swm.sportwithme.controllers;
 
-import com.swm.sportwithme.services.roleService.RoleServiceImplementation;
-import com.swm.sportwithme.services.userService.UserServiceImplementation;
+import com.swm.sportwithme.services.entityServices.roleService.RoleServiceImplementation;
+import com.swm.sportwithme.services.entityServices.userService.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

@@ -1,5 +1,7 @@
 package com.swm.sportwithme.models;
 
+import com.swm.sportwithme.models.User;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;

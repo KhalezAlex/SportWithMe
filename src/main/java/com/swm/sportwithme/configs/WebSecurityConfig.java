@@ -15,9 +15,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final String[] requestPermitAll = {"/" ,"/login", "/home_page", "/register", "/log_reg_page"};
-    private static final String[] requestPermitAdmin = {"/error_page", "/admin_page", "/user_page"};
-    private static final String[] requestPermitUser = {"/error_page", "/user_page"};
+    private static final String[] mappingsForAll = {"/" ,"/login", "/home_page", "/register",
+            "/log_reg_page", "/error_page"};
+    private static final String[] mappingsForAdmin = {"/admin_page"};
 
     @Override
     public void configure(WebSecurity web) {
@@ -32,12 +32,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //                .and()
                 .authorizeRequests()
-                .antMatchers(requestPermitAdmin).hasRole("ADMIN")
-                .antMatchers(requestPermitUser).hasRole("USER")
-                .antMatchers(requestPermitAll).permitAll()
+                .antMatchers("/user_page").hasAnyRole("ADMIN", "USER", "STRIKED")
+                .antMatchers(mappingsForAdmin).hasRole("ADMIN")
+                .antMatchers(mappingsForAll).permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/").permitAll()
+//                .and()
+//                .formLogin().loginPage("/login").defaultSuccessUrl("/").failureUrl("/").permitAll()
                 .and()
                 .logout().permitAll().logoutSuccessUrl("/");
     }

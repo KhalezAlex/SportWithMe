@@ -1,4 +1,4 @@
-package com.swm.sportwithme.restControllers;
+package com.swm.sportwithme.controllers.restControllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
