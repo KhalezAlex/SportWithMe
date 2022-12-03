@@ -1,10 +1,12 @@
 package com.swm.sportwithme.services.entityServices.cityService;
 
-import com.swm.sportwithme.models.Country;
+import com.swm.sportwithme.models.City;
+
 
 
 //дописать ссылку на страну
 public interface CityService {
-    void save(Long id, String name);
-    Country getById(Long id);
+    void save(String cityName, String countryName);
+    City getByName(String name);
+
 }

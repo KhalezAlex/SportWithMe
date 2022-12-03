@@ -11,12 +11,18 @@ public class CountryServiceImplementation implements CountryService{
     CountryDAO countryDAO;
 
     @Override
-    public void save(Long id, String name) {
+    public void save(String name) {
+        countryDAO.save(new Country(name));
+    }
 
+    @Override
+    public Country getByName(String countryName) {
+        return countryDAO.findByName(countryName);
     }
 
     @Override
     public Country getById(Long id) {
-        return null;
+        return countryDAO.findById(id).orElse(null);
     }
+
 }

@@ -25,7 +25,9 @@ public class RegistrationController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute User user) {
+        System.out.println("до");
         securityServiceImplementation.login(user.getUsername(), user.getPassword());
+        System.out.println("после");
         return "redirect:/";
     }
 }
