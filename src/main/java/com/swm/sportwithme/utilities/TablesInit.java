@@ -20,24 +20,13 @@ public class TablesInit {
         if(countryService.getById(1L) == null)
             countryService.save("Россия");
     }
-    public static void cityTableInit(CityServiceImplementation cityService){
-        if(cityService.getById(1L) == null){
-            cityService.save("Москва", "Россия");
-            cityService.save("Санкт-Петербург", "Россия");
-            cityService.save("Новосибирск", "Россия");
-            cityService.save("Екатеринбург", "Россия");
-            cityService.save("Казань", "Россия");
-            cityService.save("Нижний Новгород", "Россия");
-            cityService.save("Челябинск", "Россия");
-            cityService.save("Красноярск", "Россия");
-            cityService.save("Самара", "Россия");
-            cityService.save("Уфа", "Россия");
-            cityService.save("Ростов на Дону", "Россия");
-            cityService.save("Омск", "Россия");
-            cityService.save("Краснодар", "Россия");
-            cityService.save("Воронеж", "Россия");
-            cityService.save("Пермь", "Россия");
-            cityService.save("Волгоград", "Россия");
+    public static void cityTableInit(CityServiceImplementation cityService) {
+        String[] russianCities = {"Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань",
+                "Нижний Новгород", "Челябинск", "Красноярск", "Самара", "Уфа", "Ростов на Дону", "Омск", "Краснодар",
+                "Воронеж", "Пермь", "Волгоград"};
+        if (cityService.getById(1L) == null) {
+            for (String city : russianCities)
+                cityService.save(city, "Россия");
         }
     }
 
