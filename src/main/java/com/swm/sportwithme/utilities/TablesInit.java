@@ -1,8 +1,8 @@
 package com.swm.sportwithme.utilities;
 
 import com.swm.sportwithme.models.User;
-import com.swm.sportwithme.services.roleService.RoleServiceImplementation;
-import com.swm.sportwithme.services.userService.UserServiceImplementation;
+import com.swm.sportwithme.services.entityServices.roleService.RoleServiceImplementation;
+import com.swm.sportwithme.services.entityServices.userService.UserServiceImplementation;
 
 public class TablesInit {
     public static void rolesTableInit(RoleServiceImplementation roleService) {
@@ -14,7 +14,7 @@ public class TablesInit {
     }
 
     public static void adminInit(UserServiceImplementation userServiceImplementation) {
-        if (userServiceImplementation.findByUserName("admin") == null) {
+        if (userServiceImplementation.findByUsername("admin") == null) {
             User user = new User("admin", "admin");
             userServiceImplementation.save(user, 1L);
         }

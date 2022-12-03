@@ -1,4 +1,4 @@
-package com.swm.sportwithme.services.userService;
+package com.swm.sportwithme.services.entityServices.userService;
 
 import com.swm.sportwithme.dao.RoleDAO;
 import com.swm.sportwithme.dao.UserDAO;
@@ -24,25 +24,39 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     @Transactional
-    public void save(User user) {
+    public boolean save(User user) {
+        if (userDAO.findByUsername(user.getUsername()) != null)
+            return false;
         user.setPassword(encoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>();
         roles.add(roleDAO.getOne(2L));
         user.setRoles(roles);
         userDAO.save(user);
+        return true;
     }
 
     @Override
-    public void save(User user, Long roleId) {
+    @Transactional
+    public boolean save(User user, Long roleId) {
+        if (userDAO.findByUsername(user.getUsername()) != null)
+            return false;
         user.setPassword(encoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>();
         roles.add(roleDAO.getOne(roleId));
         user.setRoles(roles);
         userDAO.save(user);
+        return true;
     }
 
     @Override
-    public User findByUserName(String username) {
+    public boolean update(User user, String username) {
+        if (userDAO.findByUsername(username) != null)
+            user = null;
+        return true;
+    }
+
+    @Override
+    public User findByUsername(String username) {
         return userDAO.findByUsername(username);
     }
 }

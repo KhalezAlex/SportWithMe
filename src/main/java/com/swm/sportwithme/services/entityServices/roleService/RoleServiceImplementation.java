@@ -1,4 +1,4 @@
-package com.swm.sportwithme.services.roleService;
+package com.swm.sportwithme.services.entityServices.roleService;
 
 import com.swm.sportwithme.dao.RoleDAO;
 import com.swm.sportwithme.models.Role;
