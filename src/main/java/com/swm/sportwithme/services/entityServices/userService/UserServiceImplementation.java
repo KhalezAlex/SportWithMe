@@ -59,4 +59,8 @@ public class UserServiceImplementation implements UserService {
     public User findByUsername(String username) {
         return userDAO.findByUsername(username);
     }
+
+    public boolean checkLogin(String username) {
+        return userDAO.findByUsername(username)!= null;
+    }
 }

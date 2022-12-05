@@ -1,5 +1,4 @@
 let logCheck = 0;
-let phoneCheck = 0;
 
 chooseLogin();
 hideHashes();
@@ -20,6 +19,7 @@ function chooseLogin() {
     submit.removeAttr("disabled");
 
 }
+
 function chooseRegister() {
     inputChangeFunctions();
     flushRegistrationInputs();
@@ -40,10 +40,11 @@ function hideHashes() {
 }
 
 function changeAbilitySubmitLoginButton() {
-    if ($("#input_password").val() !== $("#input_password_repeat").val())
+    let inputPassword = $("#input_password");
+    if (inputPassword.val() !== $("#input_password_repeat").val() || logCheck === 1 ||
+        inputPassword.val() === "")
         $("#button_submit_form_login").attr("disabled", "disabled");
     else
-    if (logCheck === 0 && phoneCheck === 0)
         $("#button_submit_form_login").removeAttr("disabled");
 }
 
@@ -52,11 +53,11 @@ function getHash(string) {
     let inputHash = "#input_" + string + "_pass_hash";
     if ($(input).val() !== "")
         $(inputHash).val(
-            function(){
-                return ($(input).val() + $("#input_password").val()).
-                split("").reduce(function(a,b){
-                    a=((a<<5)-a)+b.charCodeAt(0);
-                    return a&a},0);
+            function () {
+                return ($(input).val() + $("#input_password").val()).split("").reduce(function (a, b) {
+                    a = ((a << 5) - a) + b.charCodeAt(0);
+                    return a & a
+                }, 0);
             });
 }
 
@@ -72,12 +73,11 @@ function flushRegistrationInputs() {
 function inputChangeFunctions() {
     onPasswordInput();
     onPasswordRepeatInput();
-    onPhoneInput();
     onLoginInput();
 }
 
 function onPasswordInput() {
-    $("#input_password").on("input", function() {
+    $("#input_password").on("input", function () {
         getHash("login");
         getHash("phone");
         changeAbilitySubmitLoginButton();
@@ -85,51 +85,14 @@ function onPasswordInput() {
 }
 
 function onPasswordRepeatInput() {
-    $("#input_password_repeat").on("input", function() {
+    $("#input_password_repeat").on("input", function () {
         changeAbilitySubmitLoginButton();
     })
 }
 
-function onPhoneInput() {
-    let phoneInput = $("#input_phone");
-
-    phoneInput.on("input", function() {
-        getHash("login");
-        getHash("phone");
-    })
-
-    phoneInput.on("change", function () {
-        console.log(phoneInput.val());
-        $.ajax({
-            url: "/checkPhoneForRegistration",
-            type: "POST",
-            dataType: "html",
-            data: {
-                phone: phoneInput.val()
-            },
-            success: function(data) {
-                console.log(JSON.parse(data));
-                if (JSON.parse(data)) {
-                    phoneInput.css("border-color", "#DF5F5FFF");
-                    phoneInput.css("border-width", "2px");
-                    phoneCheck = 1;
-                }
-                else {
-                    phoneInput.css("border-color", "#b2a0a0");
-                    phoneInput.css("border-width", "1px");
-                    phoneCheck = 0;
-                }
-            }
-        })
-    })
-}
 
 function onLoginInput() {
     let inputLogin = $("#input_login");
-    inputLogin.on("input", function() {
-        getHash("login");
-        getHash("phone");
-    })
 
     inputLogin.on("change", function () {
         $.ajax({
@@ -139,18 +102,18 @@ function onLoginInput() {
             data: {
                 login: inputLogin.val()
             },
-            success: function(data) {
+            success: function (data) {
                 console.log(JSON.parse(data));
                 if (JSON.parse(data)) {
                     inputLogin.css("border-color", "#DF5F5FFF");
                     inputLogin.css("border-width", "2px");
                     logCheck = 1;
-                }
-
-                else {
+                    changeAbilitySubmitLoginButton();
+                } else {
                     inputLogin.css("border-color", "#b2a0a0");
                     inputLogin.css("border-width", "1px");
                     logCheck = 0;
+                    changeAbilitySubmitLoginButton();
                 }
             }
         })

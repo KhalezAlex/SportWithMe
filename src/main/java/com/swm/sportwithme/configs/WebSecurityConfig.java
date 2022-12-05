@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] mappingsForAll = {"/" ,"/login", "/home_page", "/register",
-            "/log_reg_page", "/error_page"};
+            "/log_reg_page", "/error_page", "/checkLoginForRegistration"};
     private static final String[] mappingsForAdmin = {"/admin_page"};
 
     @Override

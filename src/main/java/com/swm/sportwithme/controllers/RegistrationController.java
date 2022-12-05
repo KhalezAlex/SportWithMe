@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.concurrent.TimeUnit;
+
 @Controller
 public class RegistrationController {
     @Autowired
@@ -17,9 +19,8 @@ public class RegistrationController {
 
 //разобраться, почему не автологинит сразу после регистрации
     @PostMapping("/register")
-    public String register(@ModelAttribute User user) {
+    public String register(@ModelAttribute User user) throws InterruptedException {
         userServiceImplementation.save(user);
-        securityServiceImplementation.login(user.getUsername(), user.getPassword());
         return "redirect:/";
     }
 
