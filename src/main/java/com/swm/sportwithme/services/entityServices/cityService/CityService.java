@@ -1,6 +1,6 @@
 package com.swm.sportwithme.services.entityServices.cityService;
 
-import com.swm.sportwithme.models.City;
+import com.swm.sportwithme.model.City;
 
 
 

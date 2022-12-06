@@ -1,4 +1,4 @@
-package com.swm.sportwithme.models;
+package com.swm.sportwithme.model;
 
 import lombok.Data;
 

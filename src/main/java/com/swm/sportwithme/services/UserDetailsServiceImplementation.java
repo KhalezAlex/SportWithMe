@@ -1,8 +1,8 @@
 package com.swm.sportwithme.services;
 
 import com.swm.sportwithme.dao.UserDAO;
-import com.swm.sportwithme.models.Role;
-import com.swm.sportwithme.models.User;
+import com.swm.sportwithme.model.Role;
+import com.swm.sportwithme.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

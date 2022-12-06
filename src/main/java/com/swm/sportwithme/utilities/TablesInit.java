@@ -1,7 +1,6 @@
 package com.swm.sportwithme.utilities;
 
-import com.swm.sportwithme.models.City;
-import com.swm.sportwithme.models.User;
+import com.swm.sportwithme.model.User;
 import com.swm.sportwithme.services.entityServices.cityService.CityServiceImplementation;
 import com.swm.sportwithme.services.entityServices.countryService.CountryServiceImplementation;
 import com.swm.sportwithme.services.entityServices.roleService.RoleServiceImplementation;

@@ -20,15 +20,17 @@
             <input type="submit" id="button_submit_form_login" class="input_reg_log_submit">
         </form>
     </div>
-
 </div>
 
 <footer>
 
 </footer>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
 <script src="scripts/log_reg_page.js"></script>
-<!--<script src="scripts/inputChangeFunctions.js"></script>-->
-
+<script th:if="${error}">
+    alert("this login is already in use");
+    chooseRegister();
+</script>
 </body>
 </html>

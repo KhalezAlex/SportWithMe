@@ -1,7 +1,4 @@
-package com.swm.sportwithme.models;
-
-import com.swm.sportwithme.models.User;
-import lombok.Data;
+package com.swm.sportwithme.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -2,8 +2,8 @@ package com.swm.sportwithme.services.entityServices.userService;
 
 import com.swm.sportwithme.dao.RoleDAO;
 import com.swm.sportwithme.dao.UserDAO;
-import com.swm.sportwithme.models.Role;
-import com.swm.sportwithme.models.User;
+import com.swm.sportwithme.model.Role;
+import com.swm.sportwithme.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

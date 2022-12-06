@@ -1,6 +1,6 @@
 package com.swm.sportwithme.services.entityServices.userService;
 
-import com.swm.sportwithme.models.User;
+import com.swm.sportwithme.model.User;
 
 public interface UserService {
     boolean save(User user);

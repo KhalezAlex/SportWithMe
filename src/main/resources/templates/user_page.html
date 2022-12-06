@@ -2,20 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title th:text="${#httpServletRequest.remoteUser}"></title>
     <link media="all" rel="stylesheet" href="css/user_page.css">
 </head>
 <body>
 <header>
-    USER
+    <p ></p>
     <a href="/logout">Logout</a>
     <a href="/">Home</a>
 </header>
     <div class="container">
-        <div class="div_column">
-        </div>
-        <div class="div_column">
+        <form class="form_user_data">
+            <div class="div_column">
+                <input type="text" id="input_username" class="input_reg_log_data" name="username"
+                       th:value="${#httpServletRequest.remoteUser}" readonly>
+                <input type="text" id="input_phone" class="input_reg_log_data" placeholder="phone" name="phone"
+                       readonly onclick="changeReadOnlyPhone()">
+                <input type="text" id="input_name" class="input_reg_log_data" placeholder="name" name="name"
+                       readonly onclick="changeReadOnlyName()">
+                <input type="text" id="input_age" class="input_reg_log_data" placeholder="age" name="age"
+                       readonly onclick="changeReadOnlyAge()">
+            </div>
+            <div class="div_column">
+                <input type="text" id="input_city" class="input_reg_log_data" placeholder="city" name="city"
+                       readonly onclick="changeReadOnlyCity()" >
+            </div>
+        </form>
+        <div>
+            <button><a href="/logout">Logout</a></button>
+            <button><a href="/">Home</a></button>
         </div>
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+<script src="scripts/user_page.js"></script>
 </body>
 </html>

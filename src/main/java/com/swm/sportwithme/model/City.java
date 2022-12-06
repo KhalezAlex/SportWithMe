@@ -1,6 +1,4 @@
-package com.swm.sportwithme.models;
-
-import lombok.Data;
+package com.swm.sportwithme.model;
 
 import javax.persistence.*;
 

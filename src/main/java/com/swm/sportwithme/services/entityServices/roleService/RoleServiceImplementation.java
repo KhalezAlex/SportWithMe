@@ -1,7 +1,7 @@
 package com.swm.sportwithme.services.entityServices.roleService;
 
 import com.swm.sportwithme.dao.RoleDAO;
-import com.swm.sportwithme.models.Role;
+import com.swm.sportwithme.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

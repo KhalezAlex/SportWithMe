@@ -41,6 +41,7 @@ public class HomePageController {
             homePageModelInit(model, auth);
             return "home_page";
         }
+        model.addAttribute("error", false);
         return "log_reg_page";
     }
 
